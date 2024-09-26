@@ -10,6 +10,37 @@ return {
     end,
   },
   {
+    'folke/edgy.nvim',
+    event = 'VeryLazy',
+    init = function()
+      vim.opt.laststatus = 3
+      vim.opt.splitkeep = 'screen'
+    end,
+    opts = {
+      bottom = {
+        {
+          ft = 'toggleterm',
+          title = 'Terminal',
+          size = { height = 0.4 },
+          -- exclude floating windows
+          filter = function(buf, win)
+            return vim.api.nvim_win_get_config(win).relative == ''
+          end,
+        },
+        { ft = 'qf', title = 'QuickFix' },
+        {
+          ft = 'help',
+          size = { height = 20 },
+          -- only show help buffers
+          filter = function(buf)
+            return vim.bo[buf].buftype == 'help'
+          end,
+        },
+        { title = 'Neotest Output', ft = 'neotest-output-panel', size = { height = 15 } },
+      },
+    },
+  },
+  {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
