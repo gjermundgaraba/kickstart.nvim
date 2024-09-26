@@ -1,7 +1,26 @@
 -- More general utility plugins
 
 return {
-  {
+  { -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    opts = {
+      icons = {
+        -- set icon mappings to true if you have a Nerd Font
+        mappings = true,
+      },
+      -- Document existing key chains
+      spec = {
+        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>t', group = '[T]ests' },
+      },
+    },
+  },
+  { -- Terminal
     'akinsho/toggleterm.nvim',
     event = 'VeryLazy',
     -- stylua: ignore
@@ -25,6 +44,32 @@ return {
         group = augroup_term_insert,
         pattern = 'term://*',
         command = 'startinsert',
+      })
+    end,
+  },
+  { -- Session manager
+    'folke/persistence.nvim',
+    event = 'BufReadPre',
+    opts = {
+      -- add any custom options here
+    },
+    -- stylua: ignore
+    keys = {
+      { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+      { "<leader>qS", function() require("persistence").select() end,desc = "Select Session" },
+      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+    },
+    config = function()
+      require('persistence').setup()
+
+      -- an autocommand that closes down buffers that don't work well with persistence
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'PersistenceSavePre',
+        callback = function()
+          require('neo-tree.command').execute { action = 'close' }
+          vim.cmd 'NTestCloseStuff'
+        end,
       })
     end,
   },
