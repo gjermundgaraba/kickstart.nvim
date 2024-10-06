@@ -1,7 +1,7 @@
 return {
   {
     'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+
     init = function()
       vim.cmd.colorscheme 'tokyonight-night'
 
@@ -17,26 +17,80 @@ return {
       vim.opt.splitkeep = 'screen'
     end,
     opts = {
+      left = {
+        {
+          title = 'Neo-Tree',
+          ft = 'neo-tree',
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == 'filesystem'
+          end,
+          size = {
+            height = 0.5,
+            width = 0.15,
+          },
+        },
+        {
+          ft = 'neotest-summary',
+          title = 'Neotest Summary',
+          size = {
+            height = 0.5,
+            width = 0.15,
+          },
+        },
+      },
       bottom = {
         {
           ft = 'toggleterm',
           title = 'Terminal',
-          size = { height = 0.4 },
+          size = {
+            height = 0.3,
+          },
           -- exclude floating windows
           filter = function(buf, win)
             return vim.api.nvim_win_get_config(win).relative == ''
           end,
         },
-        { ft = 'qf', title = 'QuickFix' },
+        {
+          ft = 'qf',
+          title = 'QuickFix',
+          size = {
+            height = 0.3,
+          },
+        },
         {
           ft = 'help',
-          size = { height = 20 },
+          size = {
+            height = 0.3,
+          },
           -- only show help buffers
           filter = function(buf)
             return vim.bo[buf].buftype == 'help'
           end,
         },
-        { title = 'Neotest Output', ft = 'neotest-output-panel', size = { height = 15 } },
+        {
+          title = 'Neotest Output',
+          ft = 'neotest-output-panel',
+          size = {
+            height = 0.3,
+          },
+        },
+      },
+      right = {
+
+        {
+          ft = 'Avante',
+          size = {
+            height = 0.7,
+            width = 0.2,
+          },
+        },
+        {
+          ft = 'AvanteInput',
+          size = {
+            height = 0.3,
+            width = 0.2,
+          },
+        },
       },
     },
   },

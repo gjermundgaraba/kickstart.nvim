@@ -1,5 +1,42 @@
 return {
   {
+    'folke/trouble.nvim',
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = 'Trouble',
+    keys = {
+      {
+        '<leader>xx',
+        '<cmd>Trouble diagnostics toggle<cr>',
+        desc = 'Diagnostics (Trouble)',
+      },
+      {
+        '<leader>xX',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        desc = 'Buffer Diagnostics (Trouble)',
+      },
+      {
+        '<leader>cs',
+        '<cmd>Trouble symbols toggle focus=false<cr>',
+        desc = 'Symbols (Trouble)',
+      },
+      {
+        '<leader>cl',
+        '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
+        desc = 'LSP Definitions / references / ... (Trouble)',
+      },
+      {
+        '<leader>xL',
+        '<cmd>Trouble loclist toggle<cr>',
+        desc = 'Location List (Trouble)',
+      },
+      {
+        '<leader>xQ',
+        '<cmd>Trouble qflist toggle<cr>',
+        desc = 'Quickfix List (Trouble)',
+      },
+    },
+  },
+  {
     'mfussenegger/nvim-dap',
     -- stylua: ignore
     keys = {
@@ -34,95 +71,7 @@ return {
       end
     end,
   },
-  {
-    'nvim-neotest/neotest',
-    dependencies = {
-      'nvim-neotest/nvim-nio',
-      'nvim-lua/plenary.nvim',
-      'antoinemadec/FixCursorHold.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      {
-        'fredrikaverpil/neotest-golang', -- Installation
-        dependencies = {
-          'leoluz/nvim-dap-go',
-        },
-      },
-    },
-    -- TODO: Replace the user commands with functions when this plugin is moved into a separate file
-    -- stylua: ignore
-    keys = {
-      { '<leader>tr', ':NTestRunWithOpenStuff<CR>', desc = 'Run the nearest test' },
-      { '<leader>to', ':NTestOpenStuff<CR>', desc = 'Open test utilities' },
-      { '<leader>tq', ':NTestCloseStuff<CR>', desc = 'Close test utilities' },
-      { '<leader>td', ':NTestDebugWithOpenStuff<CR>', desc ="Debug nearest test" },
-    },
-    opts = {
-      -- See all config options with :h neotest.Config
-      discovery = {
-        -- Drastically improve performance in ginormous projects by
-        -- only AST-parsing the currently opened buffer.
-        enabled = true,
-        -- Number of workers to parse files concurrently.
-        -- A value of 0 automatically assigns number based on CPU.
-        -- Set to 1 if experiencing lag.
-        concurrent = 0,
-      },
-      running = {
-        -- Run tests concurrently when an adapter provides multiple commands to run.
-        concurrent = true,
-      },
-      summary = {
-        -- Enable/disable animation of icons.
-        animated = true,
-      },
-      output = {
-        enabled = true,
-        open_on_run = true,
-      },
-      icons = {
-        child_indent = '│',
-        child_prefix = '├',
-        collapsed = '─',
-        expanded = '╮',
-        failed = '',
-        final_child_indent = ' ',
-        final_child_prefix = '╰',
-        non_collapsible = '─',
-        notify = '',
-        passed = '',
-        running = '',
-        running_animated = { '/', '|', '\\', '-', '/', '|', '\\', '-' },
-        skipped = '',
-        unknown = '',
-        watching = '',
-      },
-    },
-    config = function(_, opts)
-      local neotest = require 'neotest'
-      opts.adapters = {
-        require 'neotest-golang', -- Registration
-      }
-      neotest.setup(opts)
-      vim.api.nvim_create_user_command('NTestRunWithOpenStuff', function()
-        neotest.run.run()
-        neotest.output_panel.open()
-        neotest.summary.open()
-      end, {})
-      vim.api.nvim_create_user_command('NTestOpenStuff', function()
-        neotest.output_panel.open()
-        neotest.summary.open()
-      end, {})
-      vim.api.nvim_create_user_command('NTestCloseStuff', function()
-        neotest.output_panel.close()
-        neotest.summary.close()
-      end, {})
-      vim.api.nvim_create_user_command('NTestDebugWithOpenStuff', function()
-        neotest.output_panel.open()
-        neotest.summary.open()
-        neotest.run.run { suite = false, strategy = 'dap' }
-      end, {})
-    end,
-  },
+
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
