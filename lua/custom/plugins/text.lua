@@ -136,7 +136,11 @@ return {
   },
   {
     'echasnovski/mini.animate',
-    opts = {},
+    opts = {
+      scroll = {
+        enable = false,
+      },
+    },
   },
   {
     -- Better Around/Inside textobjects
