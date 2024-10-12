@@ -18,18 +18,26 @@ return {
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
-    build = ':Copilot auth',
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-    },
-  },
-  {
-    'zbirenbaum/copilot-cmp',
+    event = 'InsertEnter',
     config = function()
-      require('copilot_cmp').setup()
+      require('copilot').setup {
+        suggestion = {
+          auto_trigger = true,
+          keymap = {
+            accept = '<S-TAB>',
+            next = '<S-Right>',
+            prev = '<S-Left>',
+          },
+        },
+      }
     end,
   },
+  -- {
+  --   'zbirenbaum/copilot-cmp',
+  --   config = function()
+  --     require('copilot_cmp').setup()
+  --   end,
+  -- },
   { 'AndreM222/copilot-lualine' },
   --   {
   --     {
@@ -91,6 +99,10 @@ return {
     'CopilotC-Nvim/CopilotChat.nvim',
     branch = 'canary',
     cmd = 'CopilotChat',
+    dependencies = {
+      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+    },
     opts = function()
       local user = vim.env.USER or 'User'
       user = user:sub(1, 1):upper() .. user:sub(2)
