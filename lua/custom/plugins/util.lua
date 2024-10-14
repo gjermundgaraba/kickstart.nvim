@@ -47,30 +47,4 @@ return {
       })
     end,
   },
-  { -- Session manager
-    'folke/persistence.nvim',
-    event = 'BufReadPre',
-    opts = {
-      -- add any custom options here
-    },
-    -- stylua: ignore
-    keys = {
-      { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
-      { "<leader>qS", function() require("persistence").select() end,desc = "Select Session" },
-      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
-    },
-    config = function()
-      require('persistence').setup()
-
-      -- an autocommand that closes down buffers that don't work well with persistence
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'PersistenceSavePre',
-        callback = function()
-          require('neo-tree.command').execute { action = 'close' }
-          vim.cmd 'NTestCloseStuff'
-        end,
-      })
-    end,
-  },
 }
