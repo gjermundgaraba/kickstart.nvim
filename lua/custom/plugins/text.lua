@@ -134,14 +134,7 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },
-  {
-    'echasnovski/mini.animate',
-    opts = {
-      scroll = {
-        enable = false,
-      },
-    },
-  },
+
   {
     -- Better Around/Inside textobjects
     -- Examples:

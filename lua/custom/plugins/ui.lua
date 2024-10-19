@@ -1,14 +1,45 @@
 return {
   {
-    'folke/tokyonight.nvim',
-
-    init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+    'zaldih/themery.nvim',
+    lazy = false,
+    dependencies = {
+      'folke/tokyonight.nvim',
+      'rmehri01/onenord.nvim',
+      'AlexvZyl/nordic.nvim',
+      'shaunsingh/nord.nvim',
+      'sainnhe/sonokai',
+      'EdenEast/nightfox.nvim',
+      { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+      'rafamadriz/neon',
+      'shaunsingh/moonlight.nvim',
+      'dgox16/oldworld.nvim',
+      'olivercederborg/poimandres.nvim',
+      'dracula/vim',
+    },
+    config = function()
+      require('themery').setup {
+        themes = {
+          'tokyonight',
+          'onenord',
+          'nordic',
+          'nord',
+          'sonokai',
+          'nightfox',
+          'nordfox',
+          'catppuccin',
+          'catppuccin-frappe',
+          'catppuccin-macchiato',
+          'neon',
+          'moonlight',
+          'oldworld',
+          'poimandres',
+          'dracula',
+        },
+        livePreview = true,
+      }
     end,
   },
+  {},
   {
     'folke/edgy.nvim',
     event = 'VeryLazy',
@@ -17,6 +48,11 @@ return {
       vim.opt.splitkeep = 'screen'
     end,
     opts = {
+      animate = {
+        enabled = true,
+        fps = 500,
+        cps = 500,
+      },
       left = {
         {
           title = 'Neo-Tree',
@@ -145,6 +181,26 @@ return {
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false, -- add a border to hover docs and signature help
+      },
+    },
+  },
+  {
+    'echasnovski/mini.animate',
+    opts = {
+      scroll = {
+        enable = false,
+      },
+      open = {
+        -- Whether to enable this animation
+        enable = false,
+      },
+      resize = {
+        -- Whether to enable this animation
+        enable = false,
+      },
+      close = {
+        -- Whether to enable this animation
+        enable = false,
       },
     },
   },
