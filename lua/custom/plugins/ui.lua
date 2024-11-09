@@ -1,7 +1,17 @@
 return {
+  -- {
+  --   'EdenEast/nightfox.nvim',
+  --   lazy = false,
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   config = function()
+  --     -- load the colorscheme here
+  --     vim.cmd [[colorscheme nightfox]]
+  --   end,
+  -- },
   {
     'zaldih/themery.nvim',
     lazy = false,
+    priority = 1000, -- make sure to load this before all the other start plugins
     dependencies = {
       'folke/tokyonight.nvim',
       'rmehri01/onenord.nvim',
@@ -9,7 +19,7 @@ return {
       'shaunsingh/nord.nvim',
       'sainnhe/sonokai',
       'EdenEast/nightfox.nvim',
-      { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+      { 'catppuccin/nvim', name = 'catppuccin' },
       'rafamadriz/neon',
       'shaunsingh/moonlight.nvim',
       'dgox16/oldworld.nvim',
@@ -39,97 +49,96 @@ return {
       }
     end,
   },
-  {},
-  {
-    'folke/edgy.nvim',
-    event = 'VeryLazy',
-    init = function()
-      vim.opt.laststatus = 3
-      vim.opt.splitkeep = 'screen'
-    end,
-    opts = {
-      animate = {
-        enabled = true,
-        fps = 500,
-        cps = 500,
-      },
-      left = {
-        {
-          title = 'Neo-Tree',
-          ft = 'neo-tree',
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == 'filesystem'
-          end,
-          size = {
-            height = 0.5,
-            width = 0.15,
-          },
-        },
-        {
-          ft = 'neotest-summary',
-          title = 'Neotest Summary',
-          size = {
-            height = 0.5,
-            width = 0.15,
-          },
-        },
-      },
-      bottom = {
-        {
-          ft = 'toggleterm',
-          title = 'Terminal',
-          size = {
-            height = 0.3,
-          },
-          -- exclude floating windows
-          filter = function(buf, win)
-            return vim.api.nvim_win_get_config(win).relative == ''
-          end,
-        },
-        {
-          ft = 'qf',
-          title = 'QuickFix',
-          size = {
-            height = 0.3,
-          },
-        },
-        {
-          ft = 'help',
-          size = {
-            height = 0.3,
-          },
-          -- only show help buffers
-          filter = function(buf)
-            return vim.bo[buf].buftype == 'help'
-          end,
-        },
-        {
-          title = 'Neotest Output',
-          ft = 'neotest-output-panel',
-          size = {
-            height = 0.3,
-          },
-        },
-      },
-      right = {
-
-        {
-          ft = 'Avante',
-          size = {
-            height = 0.7,
-            width = 0.2,
-          },
-        },
-        {
-          ft = 'AvanteInput',
-          size = {
-            height = 0.3,
-            width = 0.2,
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   'folke/edgy.nvim',
+  --   event = 'VeryLazy',
+  --   init = function()
+  --     vim.opt.laststatus = 3
+  --     vim.opt.splitkeep = 'screen'
+  --   end,
+  --   opts = {
+  --     animate = {
+  --       enabled = true,
+  --       fps = 500,
+  --       cps = 500,
+  --     },
+  --     left = {
+  --       {
+  --         title = 'Neo-Tree',
+  --         ft = 'neo-tree',
+  --         filter = function(buf)
+  --           return vim.b[buf].neo_tree_source == 'filesystem'
+  --         end,
+  --         size = {
+  --           height = 0.5,
+  --           width = 0.15,
+  --         },
+  --       },
+  --       {
+  --         ft = 'neotest-summary',
+  --         title = 'Neotest Summary',
+  --         size = {
+  --           height = 0.5,
+  --           width = 0.15,
+  --         },
+  --       },
+  --     },
+  --     bottom = {
+  --       {
+  --         ft = 'toggleterm',
+  --         title = 'Terminal',
+  --         size = {
+  --           height = 0.3,
+  --         },
+  --         -- exclude floating windows
+  --         filter = function(buf, win)
+  --           return vim.api.nvim_win_get_config(win).relative == ''
+  --         end,
+  --       },
+  --       {
+  --         ft = 'qf',
+  --         title = 'QuickFix',
+  --         size = {
+  --           height = 0.3,
+  --         },
+  --       },
+  --       {
+  --         ft = 'help',
+  --         size = {
+  --           height = 0.3,
+  --         },
+  --         -- only show help buffers
+  --         filter = function(buf)
+  --           return vim.bo[buf].buftype == 'help'
+  --         end,
+  --       },
+  --       {
+  --         title = 'Neotest Output',
+  --         ft = 'neotest-output-panel',
+  --         size = {
+  --           height = 0.3,
+  --         },
+  --       },
+  --     },
+  --     right = {
+  --
+  --       {
+  --         ft = 'Avante',
+  --         size = {
+  --           height = 0.7,
+  --           width = 0.2,
+  --         },
+  --       },
+  --       {
+  --         ft = 'AvanteInput',
+  --         size = {
+  --           height = 0.3,
+  --           width = 0.2,
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     -- For some more potential config options:
     -- https://github.com/LazyVim/LazyVim/blob/a1c3ec4cd43fe61e3b614237a46ac92771191c81/lua/lazyvim/plugins/ui.lua#L98

@@ -11,12 +11,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'LazyDone',
-  callback = function()
-    if vim.fn.argc() == 0 then
-      vim.cmd 'Neotree toggle'
-    end
-  end,
-})

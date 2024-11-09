@@ -82,9 +82,6 @@ return {
       }
       neotest.setup(opts)
 
-      -- TODO: Remove next line:
-      require('neotest.logging'):set_level(vim.log.levels.DEBUG)
-
       vim.api.nvim_create_user_command('NTestRunWithOpenStuff', function()
         neotest.run.run()
         neotest.output_panel.open()

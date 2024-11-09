@@ -17,7 +17,9 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazyConfig = require 'custom.config.lazy'
 require('lazy').setup({
-  { import = 'custom.plugins' },
+  {
+    import = 'custom.plugins',
+  },
 }, lazyConfig)
 
 -- The line beneath this is called `modeline`. See `:help modeline`

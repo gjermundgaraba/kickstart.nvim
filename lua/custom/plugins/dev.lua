@@ -1,5 +1,5 @@
 return {
-  {
+  { -- Diagnostics
     'folke/trouble.nvim',
     opts = {}, -- for default options, refer to the configuration section for custom setup.
     cmd = 'Trouble',
@@ -36,7 +36,7 @@ return {
       },
     },
   },
-  {
+  { -- Debugging
     'mfussenegger/nvim-dap',
     -- stylua: ignore
     keys = {
@@ -45,10 +45,9 @@ return {
       -- TODO: Add step out
       { "<F8>", function() require("dap").step_over() end, mode = {"n"}, desc = "Step over" },
       { "<F9>", function() require("dap").continue() end, desc = "Continue" },
-    }
-,
+    },
   },
-  {
+  { -- Debugging UI
     'rcarriga/nvim-dap-ui',
     dependencies = {
       'nvim-neotest/nvim-nio',
