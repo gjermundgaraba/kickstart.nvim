@@ -49,6 +49,19 @@ return {
       filesystem = {
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
+        filtered_items = {
+          visible = true,
+          show_hidden_count = true,
+          hide_dotfiles = false,
+          hide_gitignored = true,
+          hide_by_name = {
+            '.git',
+            '.DS_Store',
+            'thumbs.db',
+            '.idea',
+          },
+          never_show = {},
+        },
       },
       window = {
         mappings = {
